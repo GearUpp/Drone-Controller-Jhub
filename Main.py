@@ -36,21 +36,26 @@ def fileinput():
 fileinput()
 
 def formatting():
-    global x,y
-    with open(file_location, 'r') as file:
-           row = [row for row in file if row]
-           x = int(row[0])
-           y = int(row[1])
-           current_lococation = set()
-           print("Starting coordinates are:", x , " -  ", y)
-    
+    global x,y, current_lococation
+    try:
+        with open(file_location, 'r') as file:
+            row = [row for row in file if row]
+            x = int(row[0])
+            y = int(row[1])
+            current_lococation = set()
+            print("Starting coordinates are:", x , " -  ", y)
+        moving(x,y,row)
+    except:
+        print("failed to format and create x / y inital location")
 
-def moving():
+
+
+def moving(x_initial,y_initial,rows):
     print("Running Formatter")
-    global current_lococation,x,y,file_location
+    global current_lococation,file_location
     try:
 
-           for direction in row[2:]:
+           for direction in rows[2:]:
                if direction == "N":
                    y += 1
                elif direction == "S":
@@ -66,7 +71,8 @@ def moving():
                    print(f"drone lost at Co-ordinates: ({x}, {y})")
                    break
                else:
-                   curentLocation.add((x, y))
+                   current_lococation.add((x, y))
+           grid_generator()
            fileinput()
     except:
         print("Faile to process file")
@@ -74,6 +80,8 @@ def moving():
 print(current_lococation)
 print(file_location)
 
-
+def grid_generator():
+    print("Printing Grid")
+    
 
 fileinput()
