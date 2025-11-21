@@ -1,5 +1,5 @@
 import re
-grid_size = 11
+grid_size = 12
 global file_location, current_lococation,rows
 
 text1 = './Route001.txt'
@@ -54,27 +54,32 @@ def formatting():   # Will create a starting place from rows list. and confirm i
             fileinput()
         else:
             print("Starting coordinates are:  X:", x , " -   Y: ", y)
-        moving()
+        moving(x,y,rows)
 
     except:
         print("failed to format and create x / y inital location")
 
 
 
-def moving(x_initial,y_initial,rows):  # Will add up all the directions into 
+'''         ^
+        N = x + 1 
+ < W = x - 1    E = x + 1 >
+        S = y - 1
+            ↓
+'''
 
-    print("Running Formatter")
+def moving(starting_x,starting_y,rows):  # Will add up all the directions into 
+
     global current_lococation,file_location, x,y
-    
     try:
         for i in rows:
             i = str(i.upper())
             if i == "N":
                 y += 1
-            elif i == "S":
-                y -= 1
             elif i == "E":
                 x += 1
+            elif i == "S":
+                y -= 1
             elif i == "W":
                 x -= 1
             else:
@@ -83,7 +88,7 @@ def moving(x_initial,y_initial,rows):  # Will add up all the directions into
                 print("drone out of bounds Co-ordinates:", x, " - ", y)
             else:
                 current_lococation.add((x, y))
-            grid_generator(x_initial,y_initial,rows,current_lococation)
+            grid_generator(starting_x,starting_y,rows,current_lococation)
     except:
         print("Faile to process file")
 
