@@ -36,20 +36,22 @@ def fileinput():
 fileinput()
 
 
+def Initial_location():
+
+
 
 def file_formating():
     print("Running Formatter")
     global current_lococation,x,y,file_location
     try:
        with open(file_location, 'r') as file:
-           row = [row for row in file if row.strip()]
+           row = [row for row in file if row]
            x = int(row[0])
            y = int(row[1])
            current_lococation = set()
            print(f" Starting coordinates are: ({x}, {y})")
 
-           for direction in lines[2:]:
-               direction = direction.upper()
+           for direction in row[2:]:
                if direction == "N":
                    y += 1
                elif direction == "S":
