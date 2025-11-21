@@ -19,10 +19,10 @@ S
 
 '''
 
-X = 0
-Y = 0
+x = 0
+y = 0
 
-def fileinput():
+def fileinput():   # Initial function to read user input and decide next step
     while True:
         global file_location
         file_location = input("Enter the full path to the route file (or type STOP to exit): ")
@@ -33,7 +33,7 @@ def fileinput():
             print("Exiting Drone simulation.")
             exit
 
-fileinput()
+
 
 def formatting():
     global x,y, current_lococation
@@ -52,7 +52,7 @@ def formatting():
 
 def moving(x_initial,y_initial,rows):
     print("Running Formatter")
-    global current_lococation,file_location
+    global current_lococation,file_location, x,y
     try:
 
            for direction in rows[2:]:
@@ -72,7 +72,9 @@ def moving(x_initial,y_initial,rows):
                    break
                else:
                    current_lococation.add((x, y))
-           grid_generator()
+           print(x_initial, " ", y_initial)
+           print(rows)
+           grid_generator(x_initial,y_initial,rows)
            fileinput()
     except:
         print("Faile to process file")
@@ -80,8 +82,12 @@ def moving(x_initial,y_initial,rows):
 print(current_lococation)
 print(file_location)
 
-def grid_generator():
+def grid_generator(x_initial,y_initial,rows): #once rows and initial position is calculated, a grid can be generated
     print("Printing Grid")
-    
+    error = False
+    coords = [()]
+    for rows in range(grid_size):
+        print(rows)
 
-fileinput()
+
+fileinput()  # Once all functions are loaded, loop of functions can begin
