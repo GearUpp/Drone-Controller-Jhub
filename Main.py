@@ -27,7 +27,7 @@ def fileinput():
         global file_location
         file_location = input("Enter the full path to the route file (or type STOP to exit): ")
         if re.search("(.txt)",str(fileinput) ):
-            file_formating() # Will run after a path with .txt is provided
+            formatting() # Will run after a path with .txt is provided
             exit
         elif file_location.lower().strip() == "stop":
             print("Exiting Drone simulation.")
@@ -35,21 +35,20 @@ def fileinput():
 
 fileinput()
 
-
-def Initial_location():
-
-
-
-def file_formating():
-    print("Running Formatter")
-    global current_lococation,x,y,file_location
-    try:
-       with open(file_location, 'r') as file:
+def formatting():
+    global x,y
+    with open(file_location, 'r') as file:
            row = [row for row in file if row]
            x = int(row[0])
            y = int(row[1])
            current_lococation = set()
-           print(f" Starting coordinates are: ({x}, {y})")
+           print("Starting coordinates are:", x , " -  ", y)
+    
+
+def moving():
+    print("Running Formatter")
+    global current_lococation,x,y,file_location
+    try:
 
            for direction in row[2:]:
                if direction == "N":
