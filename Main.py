@@ -1,5 +1,5 @@
 import re
-
+import sys
 grid_size = 11
 global file_location, current_lococation
 
@@ -23,20 +23,22 @@ x = 0
 y = 0
 
 def fileinput():   # Initial function to read user input and decide next step
+    global file_location
     while True:
-        global file_location
-        file_location = input("Enter the full path to the route file (or type STOP to exit): ")
-        if re.search("(.txt)",str(fileinput) ):
+        file_location = str(input("Enter the full path to the route file (or type STOP to exit): "))
+        if re.search(r".txt",str(file_location)):
+            print("Passed")
             formatting() # Will run after a path with .txt is provided
-            exit
         elif file_location.lower().strip() == "stop":
             print("Exiting Drone simulation.")
-            exit
+            break
+    exit   
 
 
 
 def formatting():
-    global x,y, current_lococation
+    print("I ran")
+    global x,y, current_lococation,file_location
     try:
         with open(file_location, 'r') as file:
             row = [row for row in file if row]
@@ -79,8 +81,8 @@ def moving(x_initial,y_initial,rows):
     except:
         print("Faile to process file")
 
-print(current_lococation)
-print(file_location)
+
+
 
 def grid_generator(x_initial,y_initial,rows): #once rows and initial position is calculated, a grid can be generated
     print("Printing Grid")
