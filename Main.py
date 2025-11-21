@@ -19,7 +19,7 @@ S
 '''
 rows = open(text1, "r").read().splitlines()
 print(rows)
-
+print(int(rows.pop(0)))
 x = 0
 y = 0
 
@@ -38,21 +38,22 @@ def fileinput():   # Initial function to read user input and decide next step
 
 
 def formatting():
-    global x,y, current_lococation,file_location
+    global x,y, current_lococation,file_location,rows
     try:
-        with open(file_location, 'r') as file:
-            row = row in file
-            print(row)
-            print(row)
-            x = int(row.pop([0]))
-            print(row)
-            y = int(row.pop([0]))
-            current_lococation = set()
-            print("ok")
+        print(rows)
+        x = int(rows.pop(0))
+
+        y = int(rows.pop(0))
+        print(rows)
+        current_lococation = set()
+        current_lococation.add((x, y))
+        if y > 12 or x > 12 or y < 0 or x < 0:
+            print("Starting coordinates are:  X:", x , " -   Y: ", y  , ". Are not possible and out of range of grid")
+            fileinput()
+        else:
             print("Starting coordinates are:  X:", x , " -   Y: ", y)
-        print(row.count("W"))
-        print("ok")
-        moving(x,y,row)
+        print(rows)
+        moving()
     except:
         print("failed to format and create x / y inital location")
 
