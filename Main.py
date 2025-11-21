@@ -1,5 +1,4 @@
 import re
-import sys
 grid_size = 11
 global file_location, current_lococation
 
@@ -37,7 +36,6 @@ def fileinput():   # Initial function to read user input and decide next step
 
 
 def formatting():
-    print("I ran")
     global x,y, current_lococation,file_location
     try:
         with open(file_location, 'r') as file:
@@ -45,14 +43,14 @@ def formatting():
             x = int(row[0])
             y = int(row[1])
             current_lococation = set()
-            print("Starting coordinates are:", x , " -  ", y)
+            print("Starting coordinates are:  X:", x , " -   Y: ", y)
         moving(x,y,row)
     except:
         print("failed to format and create x / y inital location")
 
 
 
-def moving(x_initial,y_initial,rows):
+def moving(x_initial,y_initial,rows):  # Will Calculate and create the
     print("Running Formatter")
     global current_lococation,file_location, x,y
     try:
@@ -76,8 +74,9 @@ def moving(x_initial,y_initial,rows):
                    current_lococation.add((x, y))
            print(x_initial, " ", y_initial)
            print(rows)
+           print(x)
+           print(y)
            grid_generator(x_initial,y_initial,rows)
-           fileinput()
     except:
         print("Faile to process file")
 
@@ -87,9 +86,10 @@ def moving(x_initial,y_initial,rows):
 def grid_generator(x_initial,y_initial,rows): #once rows and initial position is calculated, a grid can be generated
     print("Printing Grid")
     error = False
-    coords = [()]
-    for rows in range(grid_size):
-        print(rows)
+    coords = []
+    for col in range(grid_size):
+        for rows in reversed(range(grid_size)):
+            
 
 
 fileinput()  # Once all functions are loaded, loop of functions can begin
