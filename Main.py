@@ -103,18 +103,18 @@ def grid_generator(x_initial,y_initial,rows_list,visted_locations): #once rows a
     error = False
     coords = []
     for col in range(grid_size):
-        print("=:=:=:=:=:=:=:=:=:=:=:")
+        print("{:02d} :".format(col), end="")
         for rows in reversed(range(grid_size)):
-
             if (col == x and rows == y) or (col,rows) in visted_locations:
-                print("x:", end="")
+                print(" x :", end="")
             else:
-                print(" :", end="")
+                print("  :", end="")
+        print("\n","--:---:--:--:--:--:--:--:--:--:--:--:--:")
 
-    print("= : =: =: =: =: =: =: =: =: =: =:=:")
-    print(" 1: 2: 3: 4: 5: 6: 7: 8: 9:10:11:12")
+    print("Row; 1: 2: 3: 4: 5: 6: 7: 8: 9:10:11:12:")
 
 
 
 
 fileinput()  # Once all functions are loaded, loop of functions can begin
+#          .txt
