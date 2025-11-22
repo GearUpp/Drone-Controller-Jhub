@@ -25,16 +25,18 @@ def fileinput():   # Initial function to read user input and decide next step
     global file_location, rows
 
     while True:
-        file_location = str(input("Enter the full path to the route file (or type STOP to exit): "))
+        try:
+            file_location = str(input("Enter the full path to the route file (or type STOP to exit): "))
+            file_location = text1             #For testing purpose
+            if re.search(r".txt",str(file_location)):       
+                rows = open(file_location, "r").read().splitlines()
+                formatting() # Will run after a path with .txt is provided
 
-        if re.search(r".txt",str(file_location)):       
-            rows = open(file_location, "r").read().splitlines()
-            formatting() # Will run after a path with .txt is provided
-
-        elif file_location.lower().strip() == "stop":
-            print("Exiting Drone simulation.")
-            break
-        
+            elif file_location.lower().strip() == "stop":
+                print("Exiting Drone simulation.")
+                break
+        except:
+            print("Wrong File name / direcotry, try again")
     exit   
 
 
@@ -88,7 +90,7 @@ def moving(starting_x,starting_y,rows):  # Will add up all the directions into
                 print("drone out of bounds Co-ordinates:", x, " - ", y)
             else:
                 current_lococation.add((x, y))
-            grid_generator(starting_x,starting_y,rows,current_lococation)
+        grid_generator(starting_x,starting_y,rows,current_lococation)
     except:
         print("Faile to process file")
 
@@ -96,13 +98,21 @@ def moving(starting_x,starting_y,rows):  # Will add up all the directions into
 
 
 def grid_generator(x_initial,y_initial,rows_list,visted_locations): #once rows and initial position is calculated, a grid can be generated
-    print("Printing Grid")
+    print("Grid: ")
+    print()
     error = False
     coords = []
     for col in range(grid_size):
+        print("=:=:=:=:=:=:=:=:=:=:=:")
         for rows in reversed(range(grid_size)):
-            print()
 
+            if (col == x and rows == y) or (col,rows) in visted_locations:
+                print("x:", end="")
+            else:
+                print(" :", end="")
+
+    print("= : =: =: =: =: =: =: =: =: =: =:=:")
+    print(" 1: 2: 3: 4: 5: 6: 7: 8: 9:10:11:12")
 
 
 
