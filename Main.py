@@ -98,20 +98,18 @@ def moving(starting_x,starting_y,rows):  # Will add up all the directions into
 
 
 def grid_generator(x_initial,y_initial,rows_list,visted_locations): #once rows and initial position is calculated, a grid can be generated
-    print("Grid: ")
-    print()
-    error = False
-    coords = []
-    for col in range(grid_size):
-        print("{:02d} :".format(col), end="")
-        for rows in reversed(range(grid_size)):
+    print("  Y  :")
+    print("Rows :----:----:----;----:----:----:----:----:----:----:----:----:")
+    for col in reversed(range(grid_size)):
+        print("  {:02d} :".format(col + 1), end="")
+        for rows in range(grid_size):
             if (col == x and rows == y) or (col,rows) in visted_locations:
-                print(" x :", end="")
+                print(" >< :", end="")
             else:
-                print("  :", end="")
-        print("\n","--:---:--:--:--:--:--:--:--:--:--:--:--:")
+                print("    :", end="")
+        print("\n","----:----:----:----:----:----:----:----:----:----:----:----:----:")
 
-    print("Row; 1: 2: 3: 4: 5: 6: 7: 8: 9:10:11:12:")
+    print("Column  1 :  2 :  3 :  4 :  5 :  6 :  7 :  8 :  9 : 10 : 11 : 12 :  X  :")
 
 
 
