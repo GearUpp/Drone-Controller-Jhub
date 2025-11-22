@@ -27,7 +27,7 @@ def fileinput():   # Initial function to read user input and decide next step
     while True:
         try:
             file_location = str(input("Enter the full path to the route file (or type STOP to exit): "))
-            file_location = text1             #For testing purpose
+            #file_location = text1             #For testing purpose
             if re.search(r".txt",str(file_location)):       
                 rows = open(file_location, "r").read().splitlines()
                 formatting() # Will run after a path with .txt is provided
@@ -87,7 +87,10 @@ def moving(starting_x,starting_y,rows):  # Will add up all the directions into
             else:
                 print(i , " not used")
             if y > grid_size or x > grid_size or y <= 0 or x <= 0:
-                print("drone out of bounds Co-ordinates:", x, " - ", y)
+                print()
+                print("******** Drone out of bounds Co-ordinates:", x, " - ", y, " ********")
+                print()
+                grid_generator(starting_x,starting_y,rows,current_lococation)
             else:
                 current_lococation.add((x, y))
         grid_generator(starting_x,starting_y,rows,current_lococation)
@@ -100,9 +103,9 @@ def moving(starting_x,starting_y,rows):  # Will add up all the directions into
 def grid_generator(x_initial,y_initial,rows_list,visted_locations): #once rows and initial position is calculated, a grid can be generated
     print("  Y  :")
     print("Rows :----:----:----;----:----:----:----:----:----:----:----:----:")
-    for col in reversed(range(grid_size)):
-        print("  {:02d} :".format(col + 1), end="")
-        for rows in range(grid_size):
+    for col in range(grid_size):
+        print("  {:02d} :".format(range(grid_size)[grid_size - 1 - col] + 1), end="")
+        for rows in reversed(range(grid_size)):
             if (col == x and rows == y) or (col,rows) in visted_locations:
                 print(" >< :", end="")
             else:
@@ -110,7 +113,7 @@ def grid_generator(x_initial,y_initial,rows_list,visted_locations): #once rows a
         print("\n","----:----:----:----:----:----:----:----:----:----:----:----:----:")
 
     print("Column  1 :  2 :  3 :  4 :  5 :  6 :  7 :  8 :  9 : 10 : 11 : 12 :  X  :")
-
+    fileinput()
 
 
 
