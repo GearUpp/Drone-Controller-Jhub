@@ -18,8 +18,8 @@ S
 
 '''
 
-x = 0
-y = 0
+x = 1
+y = 1
 
 def fileinput():   # Initial function to read user input and decide next step
     global file_location, rows
@@ -50,6 +50,7 @@ def formatting():   # Will create a starting place from rows list. and confirm i
 
         current_lococation = set()
         current_lococation.add((x, y))
+        print(current_lococation)
 
         if y > grid_size or x > grid_size or y <= 0 or x <= 0:
             print("Starting coordinates are:  X:", x , " -   Y: ", y  , ". Are not possible and out of range of grid")
@@ -74,22 +75,26 @@ def moving(starting_x,starting_y,rows):  # Will add up all the directions into
 
     global current_lococation,file_location, x,y
     try:
+        print(current_lococation)
         for i in rows:
+            print(x," ", y)
             i = str(i.upper())
             if i == "N":
                 y += 1
             elif i == "E":
-                x += 1
+                x -= 1
             elif i == "S":
                 y -= 1
             elif i == "W":
-                x -= 1
+                x += 1
             else:
                 print(i , " not used")
             if y > grid_size or x > grid_size or y <= 0 or x <= 0:
                 print()
                 print("******** Drone out of bounds Co-ordinates:", x, " - ", y, " ********")
                 print()
+                print(current_lococation)
+                current_lococation.add((x, y))
                 grid_generator(starting_x,starting_y,rows,current_lococation)
             else:
                 current_lococation.add((x, y))
@@ -100,13 +105,13 @@ def moving(starting_x,starting_y,rows):  # Will add up all the directions into
 
 
 
-def grid_generator(x_initial,y_initial,rows_list,visted_locations): #once rows and initial position is calculated, a grid can be generated
+def grid_generator(x_initial,y_initial,rows_list,current_lococation): #once rows and initial position is calculated, a grid can be generated
     print("  Y  :")
     print("Rows :----:----:----;----:----:----:----:----:----:----:----:----:")
-    for col in range(grid_size):
-        print("  {:02d} :".format(range(grid_size)[grid_size - 1 - col] + 1), end="")
-        for rows in reversed(range(grid_size)):
-            if (col == x and rows == y) or (col,rows) in visted_locations:
+    for rows in reversed(range(grid_size)):
+        print("  {:02d} :".format(range(grid_size)[grid_size - 1 - rows] + 1), end="")
+        for col in range(grid_size):
+            if (col,rows) in current_lococation: 
                 print(" >< :", end="")
             else:
                 print("    :", end="")
