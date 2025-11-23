@@ -50,7 +50,7 @@ def formatting():   # Will create a starting place from rows list. and confirm i
 
         current_lococation = set()
         current_lococation.add((x, y))
-        print(current_lococation)
+
 
         if y > grid_size or x > grid_size or y <= 0 or x <= 0:
             print("Starting coordinates are:  X:", x , " -   Y: ", y  , ". Are not possible and out of range of grid")
@@ -77,7 +77,6 @@ def moving(starting_x,starting_y,rows):  # Will add up all the directions into
     try:
         print(current_lococation)
         for i in rows:
-            print(x," ", y)
             i = str(i.upper())
             if i == "N":
                 y += 1
@@ -93,7 +92,7 @@ def moving(starting_x,starting_y,rows):  # Will add up all the directions into
                 print()
                 print("******** Drone out of bounds Co-ordinates:", x, " - ", y, " ********")
                 print()
-                print(current_lococation)
+
                 current_lococation.add((x, y))
                 grid_generator(starting_x,starting_y,rows,current_lococation)
             else:
@@ -109,9 +108,9 @@ def grid_generator(x_initial,y_initial,rows_list,current_lococation): #once rows
     print("  Y  :")
     print("Rows :----:----:----;----:----:----:----:----:----:----:----:----:")
     for rows in reversed(range(grid_size)):
-        print("  {:02d} :".format(range(grid_size)[grid_size - 1 - rows] + 1), end="")
+        print("  {:02d} :".format(reversed(range(grid_size))[grid_size - 1 - rows] + 1), end="")   # Fix top part
         for col in range(grid_size):
-            if (col,rows) in current_lococation: 
+            if (col + 1,rows + 1) in current_lococation: 
                 print(" >< :", end="")
             else:
                 print("    :", end="")
