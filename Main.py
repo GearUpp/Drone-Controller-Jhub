@@ -108,7 +108,8 @@ def grid_generator(x_initial,y_initial,rows_list,current_lococation): #once rows
     print("  Y  :")
     print("Rows :----:----:----;----:----:----:----:----:----:----:----:----:")
     for rows in reversed(range(grid_size)):
-        print("  {:02d} :".format(reversed(range(grid_size))[grid_size - 1 - rows] + 1), end="")   # Fix top part
+
+        print("  {:02d} :".format(rows + 1) , end="")   # Fix top part
         for col in range(grid_size):
             if (col + 1,rows + 1) in current_lococation: 
                 print(" >< :", end="")
